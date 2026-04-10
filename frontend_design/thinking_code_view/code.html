@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina AI - Intelligent Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#ffb59d",
+                    "surface-bright": "#faf9f5",
+                    "tertiary-fixed": "#e6e2d7",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#fd5176",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#d24200",
+                    "primary-fixed": "#ffdbd0",
+                    "secondary": "#b81847",
+                    "on-primary-fixed-variant": "#832600",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#910032",
+                    "surface-variant": "#e3e2df",
+                    "tertiary": "#5e5c53",
+                    "on-surface-variant": "#5c4038",
+                    "on-primary-fixed": "#390b00",
+                    "on-surface": "#1b1c1a",
+                    "on-primary-container": "#fffbff",
+                    "surface-dim": "#dbdad6",
+                    "surface-container-highest": "#e3e2df",
+                    "surface-tint": "#ac3400",
+                    "tertiary-fixed-dim": "#cac6bc",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "outline": "#907066",
+                    "primary": "#a83300",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#ffb59d",
+                    "on-tertiary-fixed-variant": "#48473f",
+                    "tertiary-container": "#77756b",
+                    "on-secondary-container": "#5a001c",
+                    "on-secondary-fixed": "#400012",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#e5beb2",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#ffd9dc",
+                    "secondary-fixed-dim": "#ffb2bb",
+                    "background": "#faf9f5",
+                    "surface-container-high": "#e9e8e4",
+                    "inverse-surface": "#30312e",
+                    "on-tertiary-fixed": "#1d1c15",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-container-low": "#f5f4f0",
+                    "on-background": "#1b1c1a",
+                    "surface-container": "#efeeea",
+                    "surface": "#faf9f5",
+                    "inverse-on-surface": "#f2f1ed"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"],
+                    "mono": ["JetBrains Mono"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+        }
+        .cloud-shadow {
+            box-shadow: 0 12px 40px rgba(38, 37, 30, 0.06);
+        }
+        .thinking-pulse {
+            background: linear-gradient(135deg, #fff5f2 0%, #f0f0ff 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed antialiased">
+<!-- TopAppBar -->
+<header class="bg-[#faf9f5]/80 dark:bg-stone-900/80 backdrop-blur-xl docked full-width top-0 z-50 flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<button class="text-[#a83300] dark:text-orange-500 hover:bg-[#f5f4f0] dark:hover:bg-stone-800 transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-['Manrope'] font-bold text-xl tracking-tight text-[#a83300] dark:text-orange-400">AI Assistant</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-black tracking-widest text-[#a83300] bg-primary-fixed px-3 py-1 rounded-full">PRO</span>
+<button class="text-[#a83300] dark:text-orange-500 hover:bg-[#f5f4f0] dark:hover:bg-stone-800 transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<main class="min-h-screen pb-32 pt-24 px-6 md:px-12 max-w-5xl mx-auto">
+<!-- User Intent Context Section -->
+<div class="mb-12">
+<h2 class="font-headline font-extrabold text-4xl md:text-5xl tracking-tighter text-on-surface mb-4">Code Architecture Strategy</h2>
+<p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">Optimization for high-load React applications using concurrent rendering and memoization patterns.</p>
+</div>
+<div class="space-y-10">
+<!-- User Message -->
+<div class="flex flex-col items-end pl-12 md:pl-32">
+<div class="bg-surface-container-high rounded-[20px] rounded-tr-[4px] px-6 py-4 cloud-shadow">
+<p class="text-on-surface text-lg leading-relaxed">Can you write a robust TypeScript interface and a custom hook for managing complex form state with validation?</p>
+</div>
+</div>
+<!-- AI Thinking State -->
+<div class="flex flex-col items-start pr-12 md:pr-32">
+<div class="thinking-pulse rounded-[20px] rounded-tl-[4px] px-8 py-5 cloud-shadow flex items-center gap-4">
+<div class="relative w-2 h-2">
+<div class="absolute inset-0 bg-primary rounded-full animate-ping opacity-75"></div>
+<div class="relative bg-primary rounded-full w-2 h-2"></div>
+</div>
+<span class="text-on-surface font-medium tracking-wide">Thinking...</span>
+</div>
+</div>
+<!-- AI Structured Response -->
+<div class="flex flex-col items-start pr-4 md:pr-24 space-y-6">
+<div class="bg-surface-container-lowest rounded-[20px] rounded-tl-[4px] px-8 py-8 cloud-shadow w-full">
+<div class="space-y-6">
+<p class="text-on-surface text-lg leading-relaxed">
+                            To handle complex form states effectively in TypeScript, I recommend a <strong>compositional pattern</strong> that decouples validation logic from the component lifecycle.
+                        </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-5 rounded-2xl">
+<h4 class="font-headline font-bold text-primary mb-2">Key Principles</h4>
+<ul class="space-y-2 text-sm text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Strict Type Inference</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Memoized Change Handlers</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Asynchronous Validation</li>
+</ul>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl">
+<h4 class="font-headline font-bold text-primary mb-2">Architecture</h4>
+<p class="text-sm text-on-surface-variant leading-snug">The following implementation uses a generic structure to support any data shape while maintaining type safety.</p>
+</div>
+</div>
+<!-- Code Block Component -->
+<div class="mt-8 rounded-3xl overflow-hidden bg-inverse-surface border-none">
+<div class="flex justify-between items-center px-6 py-3 bg-[#1b1c1a]">
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-[#ff5f57]"></div>
+<div class="w-3 h-3 rounded-full bg-[#febc2e]"></div>
+<div class="w-3 h-3 rounded-full bg-[#28c840]"></div>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-[10px] font-mono text-stone-500 uppercase tracking-widest">useForm.ts</span>
+<button class="flex items-center gap-1.5 text-stone-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+<span class="text-xs font-bold">Copy</span>
+</button>
+</div>
+</div>
+<div class="p-6 font-mono text-sm leading-relaxed overflow-x-auto">
+<pre class="text-stone-300"><span class="text-orange-400">interface</span> <span class="text-amber-200">FormState</span>&lt;T&gt; {
+  <span class="text-stone-500">// Core state definitions</span>
+  values: T;
+  errors: Partial&lt;Record&lt;keyof T, string&gt;&gt;;
+  touched: Partial&lt;Record&lt;keyof T, boolean&gt;&gt;;
+  isSubmitting: <span class="text-emerald-400">boolean</span>;
+}
+
+<span class="text-orange-400">export const</span> <span class="text-blue-300">useForm</span> = &lt;T&gt;(<span class="text-stone-400">initialValues: T</span>) =&gt; {
+  <span class="text-orange-400">const</span> [state, setState] = <span class="text-blue-300">useState</span>&lt;<span class="text-amber-200">FormState</span>&lt;T&gt;&gt;({
+    values: initialValues,
+    errors: {},
+    touched: {},
+    isSubmitting: <span class="text-emerald-400">false</span>
+  });
+
+  <span class="text-stone-500">// Liquid change handler with generic inferring</span>
+  <span class="text-orange-400">const</span> <span class="text-blue-300">handleChange</span> = (key: keyof T, value: <span class="text-emerald-400">any</span>) =&gt; {
+    <span class="text-blue-300">setState</span>(prev =&gt; ({
+      ...prev,
+      values: { ...prev.values, [key]: value }
+    }));
+  };
+
+  <span class="text-orange-400">return</span> { ...state, handleChange };
+};</pre>
+</div>
+</div>
+<p class="text-on-surface-variant italic text-sm border-l-4 border-primary-fixed pl-4">
+                            Note: This pattern works seamlessly with library-based validation like Zod or Yup by passing a schema validator to the hook configuration.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Input (Liquid Input Field) -->
+<div class="fixed bottom-0 left-0 w-full px-6 py-8 z-40">
+<div class="max-w-4xl mx-auto relative group">
+<div class="absolute inset-0 bg-white/40 blur-3xl opacity-50 -z-10"></div>
+<div class="liquid-glass rounded-full px-6 py-3 flex items-center gap-3 shadow-2xl shadow-stone-900/10 border border-white/20">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-stone-500 hover:bg-stone-100 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<input class="flex-grow bg-transparent border-none focus:ring-0 placeholder-stone-400 text-on-surface font-medium py-3" placeholder="Ask a follow-up or refine the code..." type="text"/>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg shadow-primary/20 active:scale-90 transition-all">
+<span class="material-symbols-outlined" data-icon="arrow_upward">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Mobile Only Responsive Pivot) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-12 py-6 bg-[#faf9f5]/40 dark:bg-stone-900/40 backdrop-blur-3xl rounded-t-[32px] shadow-[0_-12px_40px_rgba(38,37,30,0.06)]">
+<button class="bg-[#a83300] text-white rounded-full p-3 hover:scale-110 transition-transform active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+</button>
+<button class="text-stone-400 dark:text-stone-500 p-3 hover:scale-110 transition-transform active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+</nav>
+<!-- Navigation Drawer (Implicitly hidden, shown as design reference) -->
+<div class="hidden">
+<aside class="fixed inset-y-0 left-0 z-[60] flex flex-col p-4 bg-[#f5f4f0] dark:bg-stone-950 h-full w-80 rounded-r-3xl shadow-2xl shadow-stone-900/10 transition-all duration-300 ease-out">
+<div class="flex items-center gap-3 mb-8 px-4">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-fixed">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional man with neutral background and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHgZBzC7gDLoi3ZXyg023OQ00aTsrxJVbLnJc8GtCxiJIxOxZJGIkP2cUxSsmjVtiQkvX9yLSwI9AV0iUN32z1y9Qt3WgAs6zaUK7XSfqxYoh5rEnRFIIZfmSJqW5hcSs6Ph81XSfaU1hfc_VfQt5jk9zzurUvbYTFHFkdUKv3BWMXJpUf2LUPAwnGgWqCGDzPCbqtRQzsuZuoyrwyq4yC9R8NqsJFDLN_z7U1gxrlVV7eyQBqmc3-CKDuQKj1L9u5UxkIKmatuGM"/>
+</div>
+<div>
+<h3 class="font-black text-lg text-[#a83300] dark:text-orange-400">Intelligence</h3>
+<p class="text-[10px] uppercase tracking-widest text-stone-500">Premium</p>
+</div>
+</div>
+<nav class="space-y-2 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 bg-[#faf9f5] dark:bg-stone-900 text-[#a83300] dark:text-orange-400 font-bold rounded-xl font-['Plus_Jakarta_Sans'] text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                    Recent Chats
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-[#e9e8e4] dark:hover:bg-stone-800 transition-all rounded-xl font-['Plus_Jakarta_Sans'] text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    New Chat
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-[#e9e8e4] dark:hover:bg-stone-800 transition-all rounded-xl font-['Plus_Jakarta_Sans'] text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</nav>
+</aside>
+</div>
+</body></html>

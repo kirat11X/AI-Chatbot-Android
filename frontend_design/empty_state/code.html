@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#ffb59d",
+                    "surface-bright": "#faf9f5",
+                    "tertiary-fixed": "#e6e2d7",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#fd5176",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#d24200",
+                    "primary-fixed": "#ffdbd0",
+                    "secondary": "#b81847",
+                    "on-primary-fixed-variant": "#832600",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#910032",
+                    "surface-variant": "#e3e2df",
+                    "tertiary": "#5e5c53",
+                    "on-surface-variant": "#5c4038",
+                    "on-primary-fixed": "#390b00",
+                    "on-surface": "#1b1c1a",
+                    "on-primary-container": "#fffbff",
+                    "surface-dim": "#dbdad6",
+                    "surface-container-highest": "#e3e2df",
+                    "surface-tint": "#ac3400",
+                    "tertiary-fixed-dim": "#cac6bc",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "outline": "#907066",
+                    "primary": "#a83300",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#ffb59d",
+                    "on-tertiary-fixed-variant": "#48473f",
+                    "tertiary-container": "#77756b",
+                    "on-secondary-container": "#5a001c",
+                    "on-secondary-fixed": "#400012",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#e5beb2",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#ffd9dc",
+                    "secondary-fixed-dim": "#ffb2bb",
+                    "background": "#faf9f5",
+                    "surface-container-high": "#e9e8e4",
+                    "inverse-surface": "#30312e",
+                    "on-tertiary-fixed": "#1d1c15",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-container-low": "#f5f4f0",
+                    "on-background": "#1b1c1a",
+                    "surface-container": "#efeeea",
+                    "surface": "#faf9f5",
+                    "inverse-on-surface": "#f2f1ed"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .liquid-gradient {
+            background: linear-gradient(135deg, #a83300 0%, #d24200 100%);
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar Section -->
+<header class="bg-[#faf9f5]/80 dark:bg-stone-900/80 backdrop-blur-xl docked full-width top-0 z-50 flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<button class="text-[#a83300] dark:text-orange-500 hover:bg-[#f5f4f0] dark:hover:bg-stone-800 transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-['Manrope'] font-bold text-xl tracking-tight text-[#a83300] dark:text-orange-400">AI Assistant</h1>
+</div>
+<button class="text-[#a83300] dark:text-orange-500 hover:bg-[#f5f4f0] dark:hover:bg-stone-800 transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<!-- Main Content Canvas (Empty State) -->
+<main class="flex-1 relative flex flex-col items-center justify-center px-8 text-center">
+<!-- Abstract Liquid Background Element -->
+<div class="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
+<div class="w-[120%] h-[60%] opacity-20 blur-[100px] liquid-gradient rounded-full" style="transform: rotate(-15deg);"></div>
+</div>
+<!-- Central Illustration -->
+<div class="relative z-10 mb-12">
+<div class="w-64 h-64 mx-auto relative group">
+<img alt="Abstract Intelligence" class="w-full h-full object-contain rounded-full shadow-2xl shadow-primary/10" data-alt="Abstract ethereal 3D glass sculpture with internal liquid warm orange and gold gradients floating in a soft white studio space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDGuu1-VbqPSaa-dKUuFeKWWpEKNqLImjz1tvZpF_7DhagJxKUph92z85hKoQV5X2tbLJj_MyKpoIUhfilUHwxk5dPo2bwNIEswEmF6WJns5MFDEQgPL_IPGhD6hOYTgG6gQ4sltygLj63cn-vC_Sam_AiagWDvko524dFPAWShZAxCWNEePibSLaVSttU0Jq2HYNnqCwQWQx9bPTqoqlWoXoK7fXpM47k7R67ek5qJlvbDHX3l_a19BbUEmm4qMdsxk7JbGY1NGw"/>
+</div>
+</div>
+<!-- Typography -->
+<div class="relative z-10 space-y-4">
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight text-on-surface">
+                Start a conversation
+            </h2>
+<p class="font-body text-lg text-on-surface-variant max-w-xs mx-auto leading-relaxed">
+                How can I assist you today?
+            </p>
+</div>
+<!-- Suggested Actions (Optional Bento hint) -->
+<div class="relative z-10 mt-12 grid grid-cols-2 gap-4 w-full max-w-sm">
+<div class="bg-surface-container-low p-4 rounded-[24px] text-left hover:bg-surface-container-high transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="edit_note">edit_note</span>
+<p class="text-sm font-semibold text-on-surface leading-tight">Draft an email</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-[24px] text-left hover:bg-surface-container-high transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="lightbulb">lightbulb</span>
+<p class="text-sm font-semibold text-on-surface leading-tight">Brainstorm ideas</p>
+</div>
+</div>
+</main>
+<!-- Footer Input Section -->
+<footer class="relative z-50 px-6 pb-10 pt-4 bg-transparent">
+<div class="max-w-xl mx-auto">
+<div class="bg-surface-container-lowest rounded-[32px] shadow-[0_12px_40px_rgba(38,37,30,0.06)] backdrop-blur-3xl flex items-center p-2 pr-3">
+<button class="p-3 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-on-surface-variant/60 font-body px-2" placeholder="Message AI Assistant..." type="text"/>
+<button class="w-12 h-12 rounded-full liquid-gradient text-white flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="arrow_upward">arrow_upward</span>
+</button>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar Section (Suppress/Hide on Focus Journey per rules, but showing icons for context as it's the main landing) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-12 py-6 bg-[#faf9f5]/40 dark:bg-stone-900/40 backdrop-blur-3xl rounded-t-[32px] shadow-[0_-12px_40px_rgba(38,37,30,0.06)] md:hidden">
+<div class="bg-[#a83300] text-white rounded-full p-3 flex items-center justify-center hover:scale-110 transition-transform active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="chat_bubble" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</div>
+<div class="text-stone-400 dark:text-stone-500 p-3 flex items-center justify-center hover:scale-110 transition-transform active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</div>
+</nav>
+<!-- Drawer Overlay (Hidden by default) -->
+<div class="hidden fixed inset-0 bg-on-surface/20 backdrop-blur-sm z-[55]"></div>
+</body></html>

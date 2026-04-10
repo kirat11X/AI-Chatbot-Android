@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina AI - Liquid Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "inverse-primary": "#ffb59d",
+                "surface-bright": "#faf9f5",
+                "tertiary-fixed": "#e6e2d7",
+                "error": "#ba1a1a",
+                "secondary-container": "#fd5176",
+                "on-error-container": "#93000a",
+                "primary-container": "#d24200",
+                "primary-fixed": "#ffdbd0",
+                "secondary": "#b81847",
+                "on-primary-fixed-variant": "#832600",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary-fixed-variant": "#910032",
+                "surface-variant": "#e3e2df",
+                "tertiary": "#5e5c53",
+                "on-surface-variant": "#5c4038",
+                "on-primary-fixed": "#390b00",
+                "on-surface": "#1b1c1a",
+                "on-primary-container": "#fffbff",
+                "surface-dim": "#dbdad6",
+                "surface-container-highest": "#e3e2df",
+                "surface-tint": "#ac3400",
+                "tertiary-fixed-dim": "#cac6bc",
+                "error-container": "#ffdad6",
+                "on-primary": "#ffffff",
+                "outline": "#907066",
+                "primary": "#a83300",
+                "on-error": "#ffffff",
+                "primary-fixed-dim": "#ffb59d",
+                "on-tertiary-fixed-variant": "#48473f",
+                "tertiary-container": "#77756b",
+                "on-secondary-container": "#5a001c",
+                "on-secondary-fixed": "#400012",
+                "on-secondary": "#ffffff",
+                "outline-variant": "#e5beb2",
+                "on-tertiary": "#ffffff",
+                "secondary-fixed": "#ffd9dc",
+                "secondary-fixed-dim": "#ffb2bb",
+                "background": "#faf9f5",
+                "surface-container-high": "#e9e8e4",
+                "inverse-surface": "#30312e",
+                "on-tertiary-fixed": "#1d1c15",
+                "on-tertiary-container": "#fffbff",
+                "surface-container-low": "#f5f4f0",
+                "on-background": "#1b1c1a",
+                "surface-container": "#efeeea",
+                "surface": "#faf9f5",
+                "inverse-on-surface": "#f2f1ed"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Manrope"],
+                "body": ["Plus Jakarta Sans"],
+                "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f5;
+        }
+        h1, h2, h3 {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface overflow-hidden">
+<!-- Top AppBar -->
+<header class="bg-[#faf9f5]/80 dark:bg-stone-900/80 backdrop-blur-xl text-[#a83300] dark:text-orange-500 docked full-width top-0 z-50 no-border tonal-layering flat no shadows flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-[#f5f4f0] dark:hover:bg-stone-800 transition-colors active:scale-95 duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-['Manrope'] font-bold text-xl tracking-tight text-[#a83300] dark:text-orange-400 font-bold tracking-tighter">AI Assistant</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-[#f5f4f0] dark:hover:bg-stone-800 transition-colors active:scale-95 duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<!-- Navigation Drawer (Sidebar) -->
+<aside class="bg-[#f5f4f0] dark:bg-stone-950 h-full w-80 rounded-r-3xl bg-shift no-border shadow-2xl shadow-stone-900/10 fixed inset-y-0 left-0 z-[60] flex flex-col p-4 transition-all duration-300 ease-out">
+<!-- Profile Header -->
+<div class="flex items-center gap-4 p-4 mb-6">
+<div class="w-12 h-12 rounded-2xl bg-primary-container overflow-hidden shadow-lg">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a young professional with soft cinematic lighting against a warm neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf0GTGvCV9R3-COAY_Vg9zlc_g5qML1DLUNWQRM4M3AjHgfFpwuMU9b4MQkmTiJszIks7Z59md7_4q4iF-QVHLEMBOXfY-VZBhbJIw-338m3f1OEJELD_RSY9c400lqzoLqL85vHgF1DJDzK16uzbqiZZR-wF8djgY1RAyZnzPpEPLZqYDLnjVLrfHnCvpNILtNY3Pa7umM2jzxqhfWRW7fZOPzttfePAvOb4-bxhIkfEfxdd-iqYBuplcahMZemX3YcxdSG0Oxwo"/>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-black text-[#a83300] dark:text-orange-400 font-['Manrope'] leading-tight">Intelligence</h2>
+<span class="text-xs font-medium text-stone-500 font-['Plus_Jakarta_Sans']">Liquid Sanctuary</span>
+<span class="text-[10px] uppercase tracking-widest text-[#a83300] font-bold mt-1">Premium</span>
+</div>
+</div>
+<!-- Navigation Actions -->
+<div class="flex flex-col gap-1 overflow-y-auto flex-1 px-2">
+<!-- Active Tab Logic: Home/New Chat -->
+<button class="flex items-center gap-4 px-4 py-3.5 mb-4 bg-[#faf9f5] dark:bg-stone-900 text-[#a83300] dark:text-orange-400 font-bold rounded-xl transition-all duration-300 ease-out font-['Plus_Jakarta_Sans'] text-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>New Chat</span>
+</button>
+<div class="px-4 py-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-stone-400">Recent Chats</span>
+</div>
+<!-- Chat History Items -->
+<div class="flex flex-col gap-1">
+<button class="flex items-center gap-4 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-[#e9e8e4] dark:hover:bg-stone-800 transition-all duration-300 ease-out rounded-xl font-['Plus_Jakarta_Sans'] text-sm group">
+<span class="material-symbols-outlined text-stone-400 group-hover:text-primary" data-icon="history">history</span>
+<span class="truncate">Conceptual Architecture Trends</span>
+</button>
+<button class="flex items-center gap-4 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-[#e9e8e4] dark:hover:bg-stone-800 transition-all duration-300 ease-out rounded-xl font-['Plus_Jakarta_Sans'] text-sm group">
+<span class="material-symbols-outlined text-stone-400 group-hover:text-primary" data-icon="history">history</span>
+<span class="truncate">UI/UX Glassmorphism Guide</span>
+</button>
+<button class="flex items-center gap-4 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-[#e9e8e4] dark:hover:bg-stone-800 transition-all duration-300 ease-out rounded-xl font-['Plus_Jakarta_Sans'] text-sm group">
+<span class="material-symbols-outlined text-stone-400 group-hover:text-primary" data-icon="history">history</span>
+<span class="truncate">Fluid Dynamics Presentation</span>
+</button>
+</div>
+</div>
+<!-- Bottom Actions -->
+<div class="mt-auto border-t border-stone-200/50 pt-4 px-2 flex flex-col gap-1">
+<button class="flex items-center gap-4 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-[#e9e8e4] dark:hover:bg-stone-800 transition-all duration-300 ease-out rounded-xl font-['Plus_Jakarta_Sans'] text-sm">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</button>
+<button class="flex items-center gap-4 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-[#e9e8e4] dark:hover:bg-stone-800 transition-all duration-300 ease-out rounded-xl font-['Plus_Jakarta_Sans'] text-sm">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Help &amp; Support</span>
+</button>
+</div>
+</aside>
+<!-- Main Canvas Content -->
+<main class="ml-80 h-screen overflow-y-auto bg-surface-bright flex flex-col relative">
+<!-- Subtle Background Accent -->
+<div class="absolute top-0 right-0 -z-10 w-1/2 h-screen opacity-10 pointer-events-none">
+<div class="w-full h-full bg-gradient-to-br from-primary to-secondary blur-[120px]"></div>
+</div>
+<!-- Chat Area -->
+<div class="flex-1 max-w-4xl mx-auto w-full p-8 pt-24 space-y-12">
+<!-- Hero Greeting -->
+<div class="space-y-4">
+<h2 class="text-6xl font-extrabold tracking-tighter text-on-surface leading-[0.9] font-['Manrope']">
+                    Welcome back, <br/>
+<span class="text-primary italic">Intelligence.</span>
+</h2>
+<p class="text-stone-500 text-lg max-w-md font-['Plus_Jakarta_Sans'] leading-relaxed">
+                    How can we expand the horizons of your Liquid Sanctuary today?
+                </p>
+</div>
+<!-- Bento Grid of Suggestions -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-6 rounded-[32px] bg-surface-container-low hover:bg-surface-container-high transition-colors group cursor-pointer relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-5 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-9xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<span class="material-symbols-outlined text-primary mb-4" data-icon="edit_note">edit_note</span>
+<h3 class="font-bold text-lg mb-2">Draft an editorial</h3>
+<p class="text-sm text-stone-500">Create a high-fashion narrative for your next design showcase.</p>
+</div>
+<div class="p-6 rounded-[32px] bg-surface-container-low hover:bg-surface-container-high transition-colors group cursor-pointer relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-5 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-9xl" data-icon="data_exploration">data_exploration</span>
+</div>
+<span class="material-symbols-outlined text-primary mb-4" data-icon="analytics">analytics</span>
+<h3 class="font-bold text-lg mb-2">Analyze patterns</h3>
+<p class="text-sm text-stone-500">Uncover the underlying logic in your latest dataset or research.</p>
+</div>
+</div>
+<!-- Recent Chat Glimpse -->
+<div class="bg-surface-container-lowest rounded-[40px] p-8 shadow-[0_12px_40px_rgba(38,37,30,0.06)] border border-white/40">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="chat">chat</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">Active Exploration</h4>
+<p class="text-[10px] uppercase tracking-widest text-stone-400">Conceptual Architecture Trends</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-4 rounded-2xl rounded-tr-none text-sm text-stone-600 leading-relaxed max-w-[85%]">
+                        "The intersection of fluid dynamics and Brutalism creates a unique tension in modern digital interfaces..."
+                    </div>
+<div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none text-sm text-[#a83300] leading-relaxed max-w-[85%] ml-auto text-right">
+                        Interesting perspective. How would you apply that to mobile-first navigation shells?
+                    </div>
+</div>
+</div>
+</div>
+<!-- Floating Chat Input -->
+<div class="sticky bottom-8 px-8 w-full max-w-4xl mx-auto z-40">
+<div class="liquid-glass rounded-full p-2 flex items-center gap-4 shadow-2xl border border-white/20">
+<button class="w-12 h-12 flex items-center justify-center text-stone-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="attachment">attachment</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder-stone-400 font-medium" placeholder="Whisper your intent..." type="text"/>
+<button class="w-12 h-12 rounded-full bg-gradient-to-br from-[#a83300] to-[#d24200] text-white flex items-center justify-center shadow-lg shadow-primary/30 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="arrow_upward">arrow_upward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Nav (Hidden on desktop, but styled per JSON) -->
+<nav class="md:hidden bg-[#faf9f5]/40 dark:bg-stone-900/40 backdrop-blur-3xl fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-12 py-6 rounded-t-[32px] no-border tonal-layering shadow-[0_-12px_40px_rgba(38,37,30,0.06)]">
+<button class="bg-[#a83300] text-white rounded-full p-3 hover:scale-110 transition-transform active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+</button>
+<button class="text-stone-400 dark:text-stone-500 p-3 hover:scale-110 transition-transform active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+</nav>
+</body></html>
