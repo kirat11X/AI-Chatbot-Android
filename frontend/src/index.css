@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: #faf9f5;
+  --surface-low: #f5f4f0;
+  --surface-lowest: #ffffff;
+  --surface-high: #e9e8e4;
+  --ink: #1b1c1a;
+  --muted: #7f6a61;
+  --primary: #a83300;
+  --primary-deep: #d24200;
+  --error: #ba1a1a;
+  --font-display: 'Manrope', 'Segoe UI', sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+  --cloud-shadow: 0 12px 40px rgba(38, 37, 30, 0.08);
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--surface);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background:
+    radial-gradient(circle at top, rgba(255, 219, 208, 0.95), transparent 35%),
+    linear-gradient(180deg, #fdfcf9 0%, #f5f1ea 100%);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100svh;
+  background: transparent;
+  color: var(--ink);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  appearance: none;
+}
+
+#root {
+  width: min(100%, 29rem);
+  min-height: 100svh;
+  margin: 0 auto;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 1rem;
+  }
+
+  #root {
+    border-radius: 2rem;
+    overflow: hidden;
+  }
+}

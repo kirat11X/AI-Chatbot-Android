@@ -1,1 +1,34 @@
 .env
+.env.*
+frontend/.env
+backend/.env
+.codex
+
+# Node dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Android build artifacts
+android/.gradle/
+android/local.properties
+android/**/build/
+android/app/release/
+android/app/debug/
+android/captures/
+
+# Android keystore (signing credentials - SECRET)
+keystore.properties
+keystore.jks
+*.jks
+*.keystore
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
