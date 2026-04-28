@@ -6,7 +6,7 @@ Last updated: 2026-04-15
 
 Status: build-ready, but not final demo-ready yet.
 
-The frontend, backend, Capacitor Android project, debug APK, release APK, and submission bundle have been created. The remaining blockers are deployment and real-device validation: the backend still needs a real `AI_API_KEY`, the frontend release build must point to the deployed HTTPS backend URL, and the APK still needs to be tested on an Android device or emulator.
+The frontend, backend, Capacitor Android project, debug APK, release APK, and submission bundle have been created. The remaining blockers are deployment and real-device validation: the backend still needs a real `GEMINI_API_KEY`, the frontend release build must point to the deployed HTTPS backend URL, and the APK still needs to be tested on an Android device or emulator.
 
 ## Completed
 
@@ -32,7 +32,7 @@ The frontend, backend, Capacitor Android project, debug APK, release APK, and su
 - Organized backend source into `index.ts`, `routes/chat.ts`, `services/ai.ts`, `middleware/errorHandler.ts`, `lib/appError.ts`, and shared chat types.
 - Implemented `GET /api/health`.
 - Implemented `POST /api/chat` with validation for `conversationId` and message payloads.
-- Implemented OpenAI service layer using `AI_API_KEY` and `AI_MODEL`.
+- Implemented Gemini service layer using `GEMINI_API_KEY` and `GEMINI_MODEL`.
 - Added CORS allowlist support through `CORS_ORIGIN`.
 - Added `express.json({ limit: '50kb' })`.
 - Added global structured error handling with consistent `{ error: { code, message } }` responses.
@@ -72,7 +72,7 @@ The frontend, backend, Capacitor Android project, debug APK, release APK, and su
 
 ## Not Completed Yet
 
-- A real AI reply has not been verified because no real `AI_API_KEY` is configured locally.
+- A real AI reply has not been verified because no real `GEMINI_API_KEY` is configured locally.
 - The backend has not been deployed publicly over HTTPS yet.
 - The frontend release APK has not been rebuilt with the final production `VITE_API_BASE_URL`.
 - The current exported APK still contains `http://localhost:3001`, so it is suitable for install/UI testing only, not live phone chat.
@@ -84,7 +84,7 @@ The frontend, backend, Capacitor Android project, debug APK, release APK, and su
 ## Required Final Steps Before Submission
 
 1. Deploy `backend/` to a public HTTPS host such as Railway, Render, or Fly.io.
-2. Set backend environment variables: `AI_API_KEY`, `AI_MODEL`, `PORT`, and `CORS_ORIGIN`.
+2. Set backend environment variables: `GEMINI_API_KEY`, `GEMINI_MODEL`, `PORT`, and `CORS_ORIGIN`.
 3. Include `capacitor://localhost` in `CORS_ORIGIN` for the Android app.
 4. Confirm `GET /api/health` works from a phone browser using the deployed HTTPS backend URL.
 5. Rebuild the frontend with `VITE_API_BASE_URL` set to the deployed backend URL.
@@ -137,7 +137,7 @@ Backend endpoint checks already completed:
 
 - `GET /api/health` returned status `ok`.
 - Malformed `POST /api/chat` returned HTTP 400 with structured error JSON.
-- Missing `AI_API_KEY` returned HTTP 503 with structured error JSON.
+- Missing `GEMINI_API_KEY` returned HTTP 503 with structured error JSON.
 - Frontend lint/build passed after excluding generated Android assets from ESLint.
 - Android web assets were synced and debug/release APKs were rebuilt.
 

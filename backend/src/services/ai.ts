@@ -1,57 +1,62 @@
-import OpenAI from 'openai'
-import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 import { AppError } from '../lib/appError'
 import type { ChatMessageInput } from '../types/chat'
 
-const DEFAULT_MODEL = 'gpt-5.2'
+const DEFAULT_MODEL = 'gemini-2.5-flash-lite'
 const REQUEST_TIMEOUT_MS = 30_000
 
-let cachedClient: OpenAI | null = null
+let cachedClient: GoogleGenerativeAI | null = null
 let cachedApiKey: string | null = null
 
 function getClient() {
-  const apiKey = process.env.AI_API_KEY?.trim()
+  const apiKey = process.env.GEMINI_API_KEY?.trim()
 
   if (!apiKey) {
     throw new AppError(
       503,
       'AI_PROVIDER_UNAVAILABLE',
-      'AI_API_KEY is missing. Set it in the backend environment before using chat.',
+      'GEMINI_API_KEY is missing. Set it in the backend environment before using chat.',
     )
   }
 
   if (!cachedClient || cachedApiKey !== apiKey) {
-    cachedClient = new OpenAI({
-      apiKey,
-      maxRetries: 1,
-      timeout: REQUEST_TIMEOUT_MS,
-    })
+    cachedClient = new GoogleGenerativeAI(apiKey)
     cachedApiKey = apiKey
   }
 
   return cachedClient
 }
 
-function toProviderMessages(
-  messages: ChatMessageInput[],
-): ChatCompletionMessageParam[] {
+function toProviderMessages(messages: ChatMessageInput[]) {
   return messages.map((message) => ({
     content: message.content,
-    role: message.role,
+    role: message.role === 'assistant' ? 'model' : 'user',
   }))
 }
 
 export async function getAIReply(messages: ChatMessageInput[]) {
   const client = getClient()
-  const model = process.env.AI_MODEL?.trim() || DEFAULT_MODEL
+  const model = process.env.GEMINI_MODEL?.trim() || DEFAULT_MODEL
 
   try {
-    const completion = await client.chat.completions.create({
-      messages: toProviderMessages(messages),
-      model,
+    const geminiModel = client.getGenerativeModel({ model })
+    const contents = toProviderMessages(messages).map((message) => ({
+      parts: [{ text: message.content }],
+      role: message.role,
+    }))
+
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      setTimeout(() => {
+        reject(new Error('Gemini request timed out.'))
+      }, REQUEST_TIMEOUT_MS)
     })
 
-    const reply = completion.choices[0]?.message?.content?.trim()
+    const result = (await Promise.race([
+      geminiModel.generateContent({ contents }),
+      timeoutPromise,
+    ])) as { response: { text(): string } }
+
+    const reply = result.response.text().trim()
 
     if (!reply) {
       throw new AppError(
@@ -67,33 +72,19 @@ export async function getAIReply(messages: ChatMessageInput[]) {
       throw error
     }
 
-    if (error instanceof OpenAI.APIConnectionTimeoutError) {
+    if (error instanceof Error && error.message.includes('timed out')) {
       throw new AppError(
         503,
         'AI_TIMEOUT',
-        'AI provider timed out. Please try again.',
+        'Gemini provider timed out. Please try again.',
       )
     }
 
-    if (error instanceof OpenAI.APIError) {
-      console.error('OpenAI API error', {
-        name: error.name,
-        requestId: error.requestID,
-        status: error.status,
-      })
-
-      throw new AppError(
-        503,
-        'AI_PROVIDER_ERROR',
-        'AI provider is unavailable right now. Please try again later.',
-      )
-    }
-
-    console.error('Unexpected AI service error', error)
+    console.error('Gemini API error', error)
     throw new AppError(
       503,
       'AI_PROVIDER_ERROR',
-      'AI provider is unavailable right now. Please try again later.',
+      'Gemini provider is unavailable right now. Please try again later.',
     )
   }
 }

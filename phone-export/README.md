@@ -35,9 +35,8 @@ On a real phone, `localhost` means the phone itself, not your laptop. Because th
 ## To Make The Phone Build Fully Live
 
 1. Deploy `backend/` to a public HTTPS host.
-2. Set `AI_API_KEY`, `AI_MODEL`, and `CORS_ORIGIN` on the hosted backend.
+2. Set `GEMINI_API_KEY`, `GEMINI_MODEL`, and `CORS_ORIGIN` on the hosted backend.
 3. Set `VITE_API_BASE_URL=https://your-backend.example.com` in `frontend/.env`.
 4. Run `npm run android:sync` from `frontend/`.
 5. Rebuild the release APK.
 6. Install the rebuilt APK on your phone.
-

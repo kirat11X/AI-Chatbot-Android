@@ -22,5 +22,5 @@ If you leave the frontend environment pointed at localhost, the APK will package
 
 - React + TypeScript frontend
 - Express + TypeScript backend
-- OpenAI-backed `/api/chat` service
+- Gemini-backed `/api/chat` service
 - Capacitor Android packaging

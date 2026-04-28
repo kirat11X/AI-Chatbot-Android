@@ -1,13 +1,13 @@
 # Lumina AI Chatbot
 
-Lumina AI is a mobile-first AI chat app built with a React + TypeScript frontend, an Express + TypeScript backend, OpenAI integration, and Capacitor Android packaging.
+Lumina AI is a mobile-first AI chat app built with a React + TypeScript frontend, an Express + TypeScript backend, Gemini integration, and Capacitor Android packaging.
 
 Current status: the codebase builds and APK artifacts exist, but the app is not final demo-ready until the backend is deployed with a real API key and the Android build is rebuilt against that deployed HTTPS backend URL. See [progress.md](progress.md) for the full checklist.
 
 ## Stack
 
 - Frontend: Vite, React 19, TypeScript
-- Backend: Express, TypeScript, OpenAI SDK
+- Backend: Express, TypeScript, Gemini SDK
 - Persistence: browser/local WebView `localStorage`
 - Android packaging: Capacitor 8
 - UI direction: warm Liquid Sanctuary palette
@@ -16,7 +16,7 @@ Current status: the codebase builds and APK artifacts exist, but the app is not 
 
 ```text
 .
-├── backend/             Express API and OpenAI service layer
+├── backend/             Express API and Gemini service layer
 ├── frontend/            Vite React app and Capacitor Android project
 ├── frontend_design/     Provided design reference material
 ├── submission/          APKs, source archive, and submission README
@@ -38,8 +38,8 @@ Backend variables:
 
 ```bash
 PORT=3001
-AI_API_KEY=your-openai-api-key
-AI_MODEL=gpt-5.2
+GEMINI_API_KEY=your-gemini-api-key
+GEMINI_MODEL=gemini-2.5-flash-lite
 CORS_ORIGIN=http://localhost:5173,capacitor://localhost
 ```
 
@@ -106,12 +106,12 @@ Already verified in this workspace:
 - Frontend production build passes.
 - `GET /api/health` works locally.
 - Malformed `POST /api/chat` returns HTTP 400.
-- Missing `AI_API_KEY` returns HTTP 503.
+- Missing `GEMINI_API_KEY` returns HTTP 503.
 - Debug and release APKs build successfully.
 
 Not yet verified:
 
-- Real AI reply with a valid `AI_API_KEY`.
+- Real AI reply with a valid `GEMINI_API_KEY`.
 - Hosted HTTPS backend from a phone.
 - Final release APK rebuilt against the hosted backend URL.
 - APK install and full chat test on an Android device or emulator.
@@ -169,8 +169,8 @@ Deployment files:
 Required production environment:
 
 ```bash
-AI_API_KEY=your-real-key
-AI_MODEL=gpt-5.2
+GEMINI_API_KEY=your-real-key
+GEMINI_MODEL=gemini-2.5-flash-lite
 CORS_ORIGIN=capacitor://localhost,https://your-frontend-preview.example
 PORT=3001
 ```
