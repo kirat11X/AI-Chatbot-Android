@@ -13,21 +13,18 @@ function App() {
   const {
     activeConversation,
     activeConversationId,
-    apiBaseUrl,
     banner,
     closeDrawer,
     closeSettings,
     conversations,
     createConversation,
     draft,
-    health,
     isActiveConversationPending,
     isDrawerOpen,
     isSettingsOpen,
     openConversation,
     openDrawer,
     openSettings,
-    refreshHealth,
     retryMessage,
     selectPrompt,
     sendDraft,
@@ -61,11 +58,8 @@ function App() {
       />
 
       <SettingsDrawer
-        apiBaseUrl={apiBaseUrl}
-        health={health}
         isOpen={isSettingsOpen}
         onClose={closeSettings}
-        onRefreshHealth={refreshHealth}
       />
 
       <main className="app-shell__main">

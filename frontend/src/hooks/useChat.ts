@@ -5,10 +5,8 @@ import {
   useState,
 } from 'react'
 import {
-  API_BASE_URL,
   ApiError,
   type ChatRequestMessage,
-  checkHealth,
   sendMessage,
 } from '../api/client.ts'
 import type { BannerState } from '../components/StatusBanner.tsx'
@@ -23,11 +21,6 @@ import {
   useConversations,
 } from '../store/conversations.ts'
 import { MessageRole, MessageStatus } from '../types.ts'
-
-export type HealthState =
-  | { type: 'checking'; detail: string }
-  | { type: 'online'; detail: string }
-  | { type: 'offline'; detail: string }
 
 function createUserMessage(content: string) {
   return {
@@ -70,9 +63,9 @@ function bannerFromError(error: unknown): Omit<BannerState, 'id'> {
       }
     }
 
-    if (error.code === 'SERVICE_UNAVAILABLE') {
+    if (error.code === 'AI_ERROR') {
       return {
-        message: 'AI service unavailable, try again later',
+        message: error.message,
         tone: 'error',
       }
     }
@@ -96,10 +89,6 @@ export function useChat() {
     [],
   )
   const [banner, setBanner] = useState<BannerState | null>(null)
-  const [health, setHealth] = useState<HealthState>({
-    type: 'checking',
-    detail: 'Checking backend reachability…',
-  })
 
   const isActiveConversationPending =
     !!activeConversationId && pendingConversationIds.includes(activeConversationId)
@@ -111,69 +100,21 @@ export function useChat() {
     })
   }, [])
 
-  const refreshHealth = useCallback(async () => {
-    if (!window.navigator.onLine) {
-      setHealth({
-        type: 'offline',
-        detail: 'Device is offline',
-      })
-      return
-    }
-
-    setHealth({
-      type: 'checking',
-      detail: 'Checking /api/health…',
-    })
-
-    try {
-      await checkHealth()
-      setHealth({
-        type: 'online',
-        detail: 'Backend is reachable',
-      })
-    } catch (error) {
-      const nextBanner = bannerFromError(error)
-
-      setHealth({
-        type: 'offline',
-        detail:
-          error instanceof ApiError && error.code === 'OFFLINE'
-            ? 'Device is offline'
-            : 'Backend is unavailable right now',
-      })
-      showBanner(nextBanner)
-    }
-  }, [showBanner])
-
+  // Show offline/online banners
   useEffect(() => {
-    const initialRefreshId = window.setTimeout(() => {
-      void refreshHealth()
-    }, 0)
-
-    const handleOnline = () => {
-      void refreshHealth()
-    }
-
     const handleOffline = () => {
-      setHealth({
-        type: 'offline',
-        detail: 'Device is offline',
-      })
       showBanner({
         message: 'No internet connection',
         tone: 'warning',
       })
     }
 
-    window.addEventListener('online', handleOnline)
     window.addEventListener('offline', handleOffline)
 
     return () => {
-      window.clearTimeout(initialRefreshId)
-      window.removeEventListener('online', handleOnline)
       window.removeEventListener('offline', handleOffline)
     }
-  }, [refreshHealth, showBanner])
+  }, [showBanner])
 
   const runSendFlow = useCallback(
     async (
@@ -196,10 +137,6 @@ export function useChat() {
         setPendingConversationIds((currentIds) =>
           currentIds.filter((id) => id !== conversationId),
         )
-        setHealth({
-          type: 'online',
-          detail: 'Backend is reachable',
-        })
       } catch (error) {
         updateMessageStatus(conversationId, userMessageId, MessageStatus.ERROR)
         setPendingConversationIds((currentIds) =>
@@ -208,19 +145,6 @@ export function useChat() {
 
         const nextBanner = bannerFromError(error)
         showBanner(nextBanner)
-
-        if (
-          error instanceof ApiError &&
-          (error.code === 'OFFLINE' || error.code === 'SERVICE_UNAVAILABLE')
-        ) {
-          setHealth({
-            type: 'offline',
-            detail:
-              error.code === 'OFFLINE'
-                ? 'Device is offline'
-                : 'Backend is unavailable right now',
-          })
-        }
       }
     },
     [showBanner],
@@ -311,7 +235,6 @@ export function useChat() {
   return {
     activeConversation,
     activeConversationId: activeConversationId ?? '',
-    apiBaseUrl: API_BASE_URL,
     banner,
     closeDrawer: () => setIsDrawerOpen(false),
     closeSettings: () => setIsSettingsOpen(false),
@@ -319,14 +242,12 @@ export function useChat() {
     createConversation,
     dismissBanner: () => setBanner(null),
     draft,
-    health,
     isActiveConversationPending,
     isDrawerOpen,
     isSettingsOpen,
     openConversation,
     openDrawer: () => setIsDrawerOpen(true),
     openSettings: () => setIsSettingsOpen(true),
-    refreshHealth: () => void refreshHealth(),
     retryMessage,
     selectPrompt,
     sendDraft,

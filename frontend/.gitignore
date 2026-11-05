@@ -8,8 +8,10 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+# Build output
 dist
 dist-ssr
+public/*.apk
 *.local
 android/.gradle/
 android/local.properties
