@@ -8,16 +8,15 @@
 [![Gemini](https://img.shields.io/badge/AI-Google%20Gemini-8E75FF.svg)](https://ai.google.dev/)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-blueviolet.svg)](https://capacitorjs.com/)
 [![Android](https://img.shields.io/badge/Platform-Android%20%7C%20Web-green.svg)](https://developer.android.com/)
+[![Vercel](https://img.shields.io/badge/Live%20Demo-Vercel-black?logo=vercel&logoColor=white)](https://ai-chatbot-android.vercel.app/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
-## 📱 Pre-Compiled Android APK
+## 🌐 Live Web Demo & 📱 Android APK
 
-A pre-compiled, installable Android debug APK is bundled directly in the root of this repository:
-👉 **[`LuminaAI-debug.apk`](./LuminaAI-debug.apk)**
-
-Download and install it directly on your Android phone to test the conversation flow, mobile keyboard handling, and conversational offline recovery.
+- 🚀 **Live Web Application**: [https://ai-chatbot-android.vercel.app/](https://ai-chatbot-android.vercel.app/)
+- 📱 **Pre-Compiled Android APK**: [`LuminaAI-debug.apk`](./LuminaAI-debug.apk) *(Direct download & install on your Android device)*
 
 ---
 
