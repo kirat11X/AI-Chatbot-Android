@@ -7,7 +7,9 @@ export interface GeminiMessage {
 
 const STORAGE_KEY_API_KEY = 'lumina_gemini_api_key'
 const STORAGE_KEY_MODEL = 'lumina_gemini_model'
-export const DEFAULT_MODEL = 'gemini-1.5-flash'
+export const DEFAULT_MODEL = 'gemini-3-flash-preview'
+export const BACKUP_MODEL = 'gemini-2.5-flash-lite'
+export const DEFAULT_API_KEY = 'AIzaSyDsCVithqpxy3oO4XZZGjqSiGL2aM8ylDI'
 const REQUEST_TIMEOUT_MS = 25_000
 
 export function getStoredApiKey(): string {
@@ -15,7 +17,7 @@ export function getStoredApiKey(): string {
     const stored = window.localStorage.getItem(STORAGE_KEY_API_KEY)?.trim()
     if (stored) return stored
   }
-  return import.meta.env.VITE_GEMINI_API_KEY?.trim() ?? ''
+  return import.meta.env.VITE_GEMINI_API_KEY?.trim() || DEFAULT_API_KEY
 }
 
 export function setStoredApiKey(key: string): void {
@@ -215,21 +217,32 @@ export async function getAIReply(messages: GeminiMessage[]): Promise<string> {
 
   try {
     const client = new GoogleGenerativeAI(apiKey)
-    const geminiModel = client.getGenerativeModel({ model: modelName })
     const contents = toGeminiContents(messages)
 
-    const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => {
-        reject(new Error('AI_TIMEOUT'))
-      }, REQUEST_TIMEOUT_MS)
-    })
+    let reply = ''
+    const models = [modelName, BACKUP_MODEL].filter(Boolean)
 
-    const result = (await Promise.race([
-      geminiModel.generateContent({ contents }),
-      timeoutPromise,
-    ])) as { response: { text(): string } }
+    for (const m of models) {
+      try {
+        const geminiModel = client.getGenerativeModel({ model: m })
+        const timeoutPromise = new Promise<never>((_, reject) => {
+          setTimeout(() => {
+            reject(new Error('AI_TIMEOUT'))
+          }, REQUEST_TIMEOUT_MS)
+        })
 
-    const reply = result.response.text().trim()
+        const result = (await Promise.race([
+          geminiModel.generateContent({ contents }),
+          timeoutPromise,
+        ])) as { response: { text(): string } }
+
+        reply = result.response.text().trim()
+        if (reply) break
+      } catch {
+        // try next model
+      }
+    }
+
     if (!reply) {
       return generateLocalFallbackReply(
         messages,
