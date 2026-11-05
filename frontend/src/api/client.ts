@@ -32,12 +32,41 @@ export async function sendMessage(
   _conversationId: string,
   messages: ChatRequestMessage[],
 ): Promise<ChatResponse> {
-  try {
-    const geminiMessages: GeminiMessage[] = messages.map((m) => ({
-      content: m.content,
-      role: m.role,
-    }))
+  const geminiMessages: GeminiMessage[] = messages.map((m) => ({
+    content: m.content,
+    role: m.role,
+  }))
 
+  // 1. Try Vercel Serverless Private API (/api/chat) with server-side private GEMINI_API_KEY
+  if (typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
+    try {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 28000)
+
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ messages: geminiMessages }),
+        signal: controller.signal,
+      })
+
+      clearTimeout(timeoutId)
+
+      if (response.ok) {
+        const data = (await response.json()) as ChatResponse
+        if (data?.reply?.content) {
+          return data
+        }
+      }
+    } catch {
+      // Serverless endpoint not present or timed out; fall back to client engine
+    }
+  }
+
+  // 2. Fall back to client-side engine (localStorage key, client env key, or local offline fallback)
+  try {
     const reply = await getAIReply(geminiMessages)
 
     return {

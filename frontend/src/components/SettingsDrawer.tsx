@@ -108,15 +108,29 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
 
         {/* Vercel Environment Variables Guide */}
         <div className="settings-card settings-card--highlight">
-          <div className="settings-card__badge">Vercel Deployment Keys</div>
+          <div className="settings-card__badge">Vercel Environment Keys</div>
           <p className="settings-card__body">
-            To host Lumina AI permanently on <strong>Vercel (Free Tier)</strong> with global Gemini access, add this Environment Variable in your Vercel Project Dashboard:
+            To host Lumina AI on <strong>Vercel (Free Tier)</strong>, add this private secret in your Vercel Project Dashboard (<strong>Settings &rarr; Environment Variables</strong>):
           </p>
 
           <div className="env-key-row">
             <div className="env-key-info">
+              <code className="env-key-name">GEMINI_API_KEY</code>
+              <span className="env-key-desc">Private Secret &bull; Recommended &bull; Zero Vercel warnings</span>
+            </div>
+            <button
+              className="env-key-copy-btn"
+              onClick={() => handleCopyEnvKey('GEMINI_API_KEY')}
+              type="button"
+            >
+              {copiedKeyName === 'GEMINI_API_KEY' ? 'Copied!' : 'Copy Key'}
+            </button>
+          </div>
+
+          <div className="env-key-row">
+            <div className="env-key-info">
               <code className="env-key-name">VITE_GEMINI_API_KEY</code>
-              <span className="env-key-desc">Google AI Studio API Key (Free)</span>
+              <span className="env-key-desc">Client Config &bull; If using this, set type to &quot;Config&quot; in Vercel</span>
             </div>
             <button
               className="env-key-copy-btn"
@@ -129,15 +143,15 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
 
           <div className="env-key-row">
             <div className="env-key-info">
-              <code className="env-key-name">VITE_GEMINI_MODEL</code>
+              <code className="env-key-name">GEMINI_MODEL</code>
               <span className="env-key-desc">Optional (default: gemini-1.5-flash)</span>
             </div>
             <button
               className="env-key-copy-btn"
-              onClick={() => handleCopyEnvKey('VITE_GEMINI_MODEL')}
+              onClick={() => handleCopyEnvKey('GEMINI_MODEL')}
               type="button"
             >
-              {copiedKeyName === 'VITE_GEMINI_MODEL' ? 'Copied!' : 'Copy Key'}
+              {copiedKeyName === 'GEMINI_MODEL' ? 'Copied!' : 'Copy Key'}
             </button>
           </div>
 
