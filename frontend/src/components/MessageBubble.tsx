@@ -2,6 +2,7 @@ import type { Message } from '../types.ts'
 import { MessageRole, MessageStatus } from '../types.ts'
 import { formatMessageTime } from '../utils/time.ts'
 import { Icon } from './icons.tsx'
+import { FormattedMessage } from './FormattedMessage.tsx'
 
 interface MessageBubbleProps {
   message: Message
@@ -15,14 +16,28 @@ export function MessageBubble({ message, onRetry }: MessageBubbleProps) {
 
   return (
     <article
-      className={`message-row ${isUserMessage ? 'message-row--user' : ''}`}
+      className={`message-row ${
+        isUserMessage ? 'message-row--user' : 'message-row--assistant'
+      }`}
     >
+      <div className="message-avatar" aria-hidden="true">
+        {isUserMessage ? (
+          <div className="avatar avatar--user">You</div>
+        ) : (
+          <div className="avatar avatar--assistant">
+            <Icon name="spark" />
+          </div>
+        )}
+      </div>
+
       <div
         className={`message-bubble ${
           isUserMessage ? 'message-bubble--user' : 'message-bubble--assistant'
         } ${isError ? 'message-bubble--error' : ''}`}
       >
-        <p className="message-bubble__content">{message.content}</p>
+        <div className="message-bubble__content">
+          <FormattedMessage content={message.content} />
+        </div>
 
         <div className="message-bubble__meta">
           <span>{formatMessageTime(message.createdAt)}</span>

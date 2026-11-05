@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,6 +16,7 @@
   --error: #ba1a1a;
   --font-display: 'Manrope', 'Segoe UI', sans-serif;
   --font-body: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --cloud-shadow: 0 12px 40px rgba(38, 37, 30, 0.08);
   font-family: var(--font-body);
   color: var(--ink);
@@ -34,6 +35,7 @@ html {
   background:
     radial-gradient(circle at top, rgba(255, 219, 208, 0.95), transparent 35%),
     linear-gradient(180deg, #fdfcf9 0%, #f5f1ea 100%);
+  min-height: 100%;
 }
 
 body {
@@ -55,18 +57,7 @@ button {
 }
 
 #root {
-  width: min(100%, 29rem);
+  width: 100%;
   min-height: 100svh;
   margin: 0 auto;
-}
-
-@media (min-width: 700px) {
-  body {
-    padding: 1rem;
-  }
-
-  #root {
-    border-radius: 2rem;
-    overflow: hidden;
-  }
 }

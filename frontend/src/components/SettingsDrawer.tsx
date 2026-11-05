@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import {
-  GEMINI_MODEL,
+  DEFAULT_MODEL,
   getStoredApiKey,
-  setStoredApiKey,
   getStoredModel,
-  setStoredModel,
   isApiKeyConfigured,
+  setStoredApiKey,
+  setStoredModel,
 } from '../api/gemini.ts'
 import { Icon } from './icons.tsx'
 
@@ -14,13 +14,19 @@ interface SettingsDrawerProps {
   onClose: () => void
 }
 
-const APP_VERSION = '0.1.0'
+const AVAILABLE_MODELS = [
+  { id: 'gemini-1.5-flash', name: 'Gemini 1.5 Flash (Fast & Free)', tag: 'Recommended' },
+  { id: 'gemini-2.0-flash', name: 'Gemini 2.0 Flash (Next-Gen)', tag: 'Fast' },
+  { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash', tag: 'Preview' },
+  { id: 'gemini-1.5-pro', name: 'Gemini 1.5 Pro (Deep Reasoning)', tag: 'Pro' },
+]
 
 export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
   const [apiKey, setApiKey] = useState(() => getStoredApiKey())
   const [model, setModel] = useState(() => getStoredModel())
   const [isConfigured, setIsConfigured] = useState(() => isApiKeyConfigured())
   const [saveStatus, setSaveStatus] = useState<string | null>(null)
+  const [copiedKeyName, setCopiedKeyName] = useState<string | null>(null)
   const [showKey, setShowKey] = useState(false)
 
   const handleSave = () => {
@@ -34,11 +40,18 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
   const handleClear = () => {
     setApiKey('')
     setStoredApiKey('')
-    setStoredModel(GEMINI_MODEL)
-    setModel(GEMINI_MODEL)
+    setStoredModel(DEFAULT_MODEL)
+    setModel(DEFAULT_MODEL)
     setIsConfigured(false)
     setSaveStatus('Key cleared. Switched to local fallback mode.')
     setTimeout(() => setSaveStatus(null), 3000)
+  }
+
+  const handleCopyEnvKey = (keyName: string) => {
+    navigator.clipboard.writeText(keyName).then(() => {
+      setCopiedKeyName(keyName)
+      setTimeout(() => setCopiedKeyName(null), 2000)
+    })
   }
 
   return (
@@ -56,8 +69,10 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
       >
         <div className="settings-drawer__header">
           <div>
-            <p className="settings-drawer__eyebrow">About this build</p>
-            <h2>Settings &amp; info</h2>
+            <h2 className="settings-drawer__title">Lumina Settings</h2>
+            <p className="settings-drawer__subtitle">
+              Web &amp; Mobile Configuration
+            </p>
           </div>
 
           <button
@@ -70,23 +85,9 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
           </button>
         </div>
 
+        {/* Live Engine Status */}
         <div className="settings-card">
-          <p className="settings-card__label">App version</p>
-          <p className="settings-card__value">{APP_VERSION}</p>
-        </div>
-
-        <div className="settings-card">
-          <p className="settings-card__label">Description</p>
-          <p className="settings-card__body">
-            An Android-first assistant UI inspired by the Liquid Sanctuary
-            design aesthetic, powered by Google Gemini AI with instant offline
-            local fallback, persisted conversation history, and zero-backend
-            Vercel hosting.
-          </p>
-        </div>
-
-        <div className="settings-card">
-          <p className="settings-card__label">AI Engine Status</p>
+          <p className="settings-card__label">Active AI Engine</p>
           {isConfigured ? (
             <div className="status-pill status-pill--online">
               <Icon name="status" />
@@ -100,17 +101,66 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
           )}
           <p className="settings-card__hint">
             {isConfigured
-              ? 'Connected to Google Gemini API'
-              : 'Zero external backend required. Running via instant local assistant.'}
+              ? 'Connected to Google Gemini API for live generative responses.'
+              : 'Zero-configuration mode active. All queries receive thoughtful local offline responses without external API calls.'}
           </p>
         </div>
 
+        {/* Vercel Environment Variables Guide */}
+        <div className="settings-card settings-card--highlight">
+          <div className="settings-card__badge">Vercel Deployment Keys</div>
+          <p className="settings-card__body">
+            To host Lumina AI permanently on <strong>Vercel (Free Tier)</strong> with global Gemini access, add this Environment Variable in your Vercel Project Dashboard:
+          </p>
+
+          <div className="env-key-row">
+            <div className="env-key-info">
+              <code className="env-key-name">VITE_GEMINI_API_KEY</code>
+              <span className="env-key-desc">Google AI Studio API Key (Free)</span>
+            </div>
+            <button
+              className="env-key-copy-btn"
+              onClick={() => handleCopyEnvKey('VITE_GEMINI_API_KEY')}
+              type="button"
+            >
+              {copiedKeyName === 'VITE_GEMINI_API_KEY' ? 'Copied!' : 'Copy Key'}
+            </button>
+          </div>
+
+          <div className="env-key-row">
+            <div className="env-key-info">
+              <code className="env-key-name">VITE_GEMINI_MODEL</code>
+              <span className="env-key-desc">Optional (default: gemini-1.5-flash)</span>
+            </div>
+            <button
+              className="env-key-copy-btn"
+              onClick={() => handleCopyEnvKey('VITE_GEMINI_MODEL')}
+              type="button"
+            >
+              {copiedKeyName === 'VITE_GEMINI_MODEL' ? 'Copied!' : 'Copy Key'}
+            </button>
+          </div>
+
+          <a
+            className="settings-card__link"
+            href="https://aistudio.google.com/apikey"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get a free Gemini API key at Google AI Studio &rarr;
+          </a>
+        </div>
+
+        {/* Browser In-Memory / LocalStorage Key Override */}
         <div className="settings-card">
-          <p className="settings-card__label">Google Gemini API Key</p>
+          <p className="settings-card__label">Browser / Client API Key</p>
+          <p className="settings-card__body">
+            You can also paste a key directly below. It is stored securely only in your browser&apos;s <code>localStorage</code>.
+          </p>
           <input
             className="settings-card__input"
             onChange={(e) => setApiKey(e.target.value)}
-            placeholder="AIzaSy... (optional)"
+            placeholder="AIzaSy... (optional for testing)"
             type={showKey ? 'text' : 'password'}
             value={apiKey}
           />
@@ -146,17 +196,42 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
             >
               {saveStatus}
             </p>
-          ) : (
-            <p className="settings-card__hint">
-              Optional: Enter your own Google AI key to chat directly with Gemini.
-            </p>
-          )}
+          ) : null}
         </div>
 
+        {/* Model Selection */}
         <div className="settings-card">
-          <p className="settings-card__label">Android APK Package</p>
+          <p className="settings-card__label">Gemini Model Selection</p>
+          <div className="model-select-group">
+            {AVAILABLE_MODELS.map((m) => (
+              <label
+                key={m.id}
+                className={`model-option ${model === m.id ? 'model-option--selected' : ''}`}
+              >
+                <input
+                  type="radio"
+                  name="model"
+                  value={m.id}
+                  checked={model === m.id}
+                  onChange={(e) => {
+                    setModel(e.target.value)
+                    setStoredModel(e.target.value)
+                  }}
+                />
+                <div className="model-option__info">
+                  <span className="model-option__name">{m.name}</span>
+                  <span className="model-option__tag">{m.tag}</span>
+                </div>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Android APK Download Card */}
+        <div className="settings-card">
+          <p className="settings-card__label">Android Mobile App</p>
           <p className="settings-card__body">
-            Installable debug APK built with Capacitor for real Android devices.
+            Download and install the native Android APK directly on your phone:
           </p>
           <a
             className="settings-card__action"
@@ -165,9 +240,13 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
             style={{
               textDecoration: 'none',
               marginTop: '0.8rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem',
             }}
           >
-            Download LuminaAI-debug.apk
+            <span>📱 Download LuminaAI-debug.apk (5.9 MB)</span>
           </a>
         </div>
       </aside>

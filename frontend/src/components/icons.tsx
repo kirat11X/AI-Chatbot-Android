@@ -1,5 +1,7 @@
 type IconName =
+  | 'check'
   | 'close'
+  | 'copy'
   | 'history'
   | 'menu'
   | 'more'
@@ -16,7 +18,12 @@ interface IconProps {
 }
 
 const iconPaths: Record<IconName, string[]> = {
+  check: ['M20 6 9 17l-5-5'],
   close: ['M6 6l12 12', 'M18 6 6 18'],
+  copy: [
+    'M8 4h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z',
+    'M16 8v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2',
+  ],
   history: [
     'M4 12a8 8 0 1 0 2.343-5.657',
     'M4 4v5h5',
@@ -25,7 +32,12 @@ const iconPaths: Record<IconName, string[]> = {
   menu: ['M4 7h16', 'M4 12h16', 'M4 17h16'],
   more: ['M6 12h.01', 'M12 12h.01', 'M18 12h.01'],
   plus: ['M12 5v14', 'M5 12h14'],
-  refresh: ['M20 11a8 8 0 0 0-13.657-4.657L4 9', 'M4 4v5h5', 'M4 13a8 8 0 0 0 13.657 4.657L20 15', 'M20 20v-5h-5'],
+  refresh: [
+    'M20 11a8 8 0 0 0-13.657-4.657L4 9',
+    'M4 4v5h5',
+    'M4 13a8 8 0 0 0 13.657 4.657L20 15',
+    'M20 20v-5h-5',
+  ],
   send: ['M4 12 20 4l-5 16-3.5-5.5L4 12Z', 'm11.5 14.5 8.5-10.5'],
   settings: [
     'M12 3v2.2',
